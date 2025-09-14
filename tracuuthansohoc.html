@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thần Số Học - Tra Cứu Số Đường Đời Qua Ngày Sinh</title>
+    <meta name="description" content="Khám phá bí mật thần số học qua ngày tháng năm sinh. Tính toán số đường đời, số biểu đạt và giải thích ý nghĩa đầy đủ. Tra cứu thần số học chính xác và miễn phí.">
+    <meta name="keywords" content="thần số học, numerology, số đường đời, ngày sinh, tử vi, vận mệnh">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Thần Số Học - Tra Cứu Số Đường Đời">
+    <meta property="og:description" content="Khám phá bí mật thần số học qua ngày tháng năm sinh của bạn">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: 139, 69, 196;
+            --primary-light: 147, 51, 234;
+            --accent: 245, 158, 11;
+            --background: 248, 250, 252;
+            --foreground: 15, 23, 42;
+            --muted: 226, 232, 240;
+            --muted-foreground: 100, 116, 139;
+            --card: 255, 255, 255;
+            --border: 226, 232, 240;
+        }
+
+        .dark {
+            --background: 15, 23, 42;
+            --foreground: 248, 250, 252;
+            --muted: 51, 65, 85;
+            --muted-foreground: 148, 163, 184;
+            --card: 30, 41, 59;
+            --border: 51, 65, 85;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: rgb(var(--background));
+            color: rgb(var(--foreground));
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(var(--background), 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgb(var(--border));
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--accent)));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: rgb(var(--foreground));
+        }
+
+        .nav {
+            display: none;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: rgb(var(--muted-foreground));
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: rgb(var(--foreground));
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            color: rgb(var(--foreground));
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(var(--muted), 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(139, 69, 196, 0.8), rgba(59, 130, 246, 0.6)),
+                        radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.3) 0%, transparent 50%);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 64rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.75rem;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-card {
+            max-width: 32rem;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: rgb(var(--foreground));
+            margin-bottom: 1rem;
+        }
+
+        /* Form */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgb(var(--muted-foreground));
+        }
+
+        .form-input {
+            padding: 0.75rem;
+            border: 1px solid rgb(var(--border));
+            border-radius: 0.375rem;
+            text-align: center;
+            font-size: 0.875rem;
+            background: rgb(var(--background));
+            color: rgb(var(--foreground));
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgb(var(--primary));
+            box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
+        }
+
+        .form-button {
+            background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--primary-light)));
+            color: white;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .form-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px -5px rgba(var(--primary), 0.3);
+        }
+
+        /* Results Section */
+        .results {
+            padding: 3rem 0;
+            background: rgba(var(--muted), 0.3);
+        }
+
+        .results-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(var(--foreground));
+            margin-bottom: 1rem;
+        }
+
+        .results-subtitle {
+            text-align: center;
+            color: rgb(var(--muted-foreground));
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            background: rgb(var(--card));
+            border: 1px solid rgb(var(--border));
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-number {
+            width: 5rem;
+            height: 5rem;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .card-number.primary {
+            background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--accent)));
+        }
+
+        .card-number.secondary {
+            background: linear-gradient(135deg, rgb(59, 130, 246), rgb(147, 51, 234));
+        }
+
+        .card-number.accent {
+            background: linear-gradient(135deg, rgb(147, 51, 234), rgb(168, 85, 247));
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: rgb(var(--foreground));
+            margin-bottom: 0.5rem;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: rgba(var(--muted), 1);
+            color: rgb(var(--muted-foreground));
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: rgb(var(--muted-foreground));
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: rgb(var(--background));
+        }
+
+        .features-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(var(--foreground));
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: rgb(var(--foreground));
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-description {
+            color: rgb(var(--muted-foreground));
+        }
+
+        /* Footer */
+        .footer {
+            background: rgb(var(--card));
+            border-top: 1px solid rgb(var(--border));
+            padding: 2rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            color: rgb(var(--foreground));
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgb(var(--muted-foreground));
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: rgb(var(--foreground));
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgb(var(--border));
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: rgb(var(--muted-foreground));
+            font-size: 0.875rem;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .highlight {
+            color: rgb(var(--accent));
+            font-weight: 600;
+        }
+
+        /* Hero highlights */
+        .hero-highlights {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-highlight {
+            text-align: center;
+        }
+
+        .hero-highlight-icon {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: rgb(var(--accent));
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-highlight h3 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-highlight p {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">♦</div>
+                    <h1 class="logo-text font-serif">Thần Số Học</h1>
+                </div>
+                
+                <nav class="nav">
+                    <a href="#tra-cuu" class="nav-link">Tra Cứu</a>
+                    <a href="#huong-dan" class="nav-link">Hướng Dẫn</a>
+                    <a href="#lien-he" class="nav-link">Liên Hệ</a>
+                </nav>
+
+                <button class="theme-toggle" onclick="toggleDarkMode()">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title font-serif">
+                    Khám Phá Bí Mật<br>
+                    <span style="color: rgb(var(--accent));">Thần Số Học</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Tìm hiểu số đường đời, số biểu đạt và những bí ẩn về con số qua ngày tháng năm sinh của bạn
+                </p>
+
+                <div class="hero-card">
+                    <h2 class="hero-card-title font-serif">Nhập Ngày Sinh Của Bạn</h2>
+                    <form class="form" onsubmit="calculateNumerology(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="day">Ngày</label>
+                                <input type="number" id="day" class="form-input" min="1" max="31" placeholder="01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="month">Tháng</label>
+                                <input type="number" id="month" class="form-input" min="1" max="12" placeholder="01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="year">Năm</label>
+                                <input type="number" id="year" class="form-input" min="1900" max="2024" placeholder="1990" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="form-button">
+                            <span>📊</span>
+                            Tính Toán Thần Số Học
+                        </button>
+                    </form>
+                </div>
+
+                <div class="hero-highlights">
+                    <div class="hero-highlight">
+                        <div class="hero-highlight-icon">✦</div>
+                        <h3>Số Đường Đời</h3>
+                        <p>Khám phá hành trình cuộc đời</p>
+                    </div>
+                    <div class="hero-highlight">
+                        <div class="hero-highlight-icon">◆</div>
+                        <h3>Số Biểu Đạt</h3>
+                        <p>Hiểu rõ tài năng bẩm sinh</p>
+                    </div>
+                    <div class="hero-highlight">
+                        <div class="hero-highlight-icon">⬟</div>
+                        <h3>Số Linh Hồn</h3>
+                        <p>Tìm hiểu khát vọng nội tâm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results hidden">
+        <div class="container">
+            <h2 class="results-title font-serif">Kết Quả Thần Số Học</h2>
+            <p class="results-subtitle">
+                Dựa trên ngày sinh: <span id="birth-date" class="highlight"></span>
+            </p>
+
+            <div class="results-grid">
+                <div class="card">
+                    <div class="card-number primary" id="life-path-number">1</div>
+                    <h3 class="card-title font-serif">Số Đường Đời</h3>
+                    <span class="card-badge">Life Path Number</span>
+                    <p class="card-description" id="life-path-description">
+                        Loading...
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-number secondary" id="expression-number">2</div>
+                    <h3 class="card-title font-serif">Số Biểu Đạt</h3>
+                    <span class="card-badge">Expression Number</span>
+                    <p class="card-description" id="expression-description">
+                        Loading...
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-number accent" id="soul-urge-number">3</div>
+                    <h3 class="card-title font-serif">Số Linh Hồn</h3>
+                    <span class="card-badge">Soul Urge Number</span>
+                    <p class="card-description" id="soul-urge-description">
+                        Loading...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="features-title font-serif">Tại Sao Chọn Thần Số Học?</h2>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--accent)));">✨</div>
+                    <h3 class="feature-title">Chính Xác</h3>
+                    <p class="feature-description">
+                        Tính toán dựa trên các công thức thần số học truyền thống được kiểm chứng qua thời gian.
+                    </p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, rgb(59, 130, 246), rgb(147, 51, 234));">🔮</div>
+                    <h3 class="feature-title">Chi Tiết</h3>
+                    <p class="feature-description">
+                        Phân tích đầy đủ các khía cạnh quan trọng của cuộc đời qua từng con số đặc biệt.
+                    </p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, rgb(147, 51, 234), rgb(168, 85, 247));">💫</div>
+                    <h3 class="feature-title">Miễn Phí</h3>
+                    <p class="feature-description">
+                        Hoàn toàn miễn phí và không yêu cầu đăng ký tài khoản hay thông tin cá nhân.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <div class="logo-icon">♦</div>
+                        <h3 class="logo-text font-serif">Thần Số Học</h3>
+                    </div>
+                    <p style="color: rgb(var(--muted-foreground)); font-size: 0.875rem;">
+                        Khám phá bí mật cuộc đời qua ngày tháng năm sinh với thần số học chính xác và miễn phí.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liên Kết</h4>
+                    <ul class="footer-links">
+                        <li><a href="#tra-cuu">Tra Cứu Thần Số</a></li>
+                        <li><a href="#huong-dan">Hướng Dẫn Sử Dụng</a></li>
+                        <li><a href="#ve-chung-toi">Về Chúng Tôi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Thông Tin</h4>
+                    <ul class="footer-links">
+                        <li><a href="#lien-he">Liên Hệ</a></li>
+                        <li><a href="#chinh-sach">Chính Sách Bảo Mật</a></li>
+                        <li><a href="#dieu-khoan">Điều Khoản Sử Dụng</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Thần Số Học. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode functionality
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', isDark);
+        }
+
+        // Load dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+
+        // Numerology calculation functions
+        function reduceToSingleDigit(num) {
+            while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+                num = num.toString().split('').map(Number).reduce((sum, digit) => sum + digit, 0);
+            }
+            return num;
+        }
+
+        function calculateLifePath(day, month, year) {
+            const reducedDay = reduceToSingleDigit(day);
+            const reducedMonth = reduceToSingleDigit(month);
+            const reducedYear = reduceToSingleDigit(year);
+            const sum = reducedDay + reducedMonth + reducedYear;
+            return reduceToSingleDigit(sum);
+        }
+
+        function calculateExpression(day, month, year) {
+            const sum = (day * 2) + (month * 3) + (year % 100);
+            return reduceToSingleDigit(sum);
+        }
+
+        function calculateSoulUrge(day, month, year) {
+            const sum = (day * 3) + (month * 2) + Math.floor(year / 100);
+            return reduceToSingleDigit(sum);
+        }
+
+        // Interpretations
+        const interpretations = {
+            lifePath: {
+                1: "Bạn là người lãnh đạo bẩm sinh với tinh thần độc lập mạnh mẽ. Bạn có khả năng tiên phong, sáng tạo và thích đi đầu trong mọi việc. Cuộc đời bạn hướng tới việc khẳng định bản thân và tạo ra những điều mới mẻ.",
+                2: "Bạn là người hòa hợp, nhạy cảm và có khả năng hợp tác tuyệt vời. Bạn thích làm việc nhóm, biết lắng nghe và có tài ngoại giao. Cuộc đời bạn hướng tới việc tạo ra sự cân bằng và hài hòa.",
+                3: "Bạn có tài năng nghệ thuật và giao tiếp xuất sắc. Tính cách vui vẻ, lạc quan giúp bạn truyền cảm hứng cho người khác. Cuộc đời bạn hướng tới việc thể hiện sự sáng tạo và mang lại niềm vui.",
+                4: "Bạn là người thực tế, chăm chỉ và có tính kỷ luật cao. Bạn thích xây dựng nền tảng vững chắc và làm việc có hệ thống. Cuộc đời bạn hướng tới việc tạo ra sự ổn định và bền vững.",
+                5: "Bạn yêu thích tự do, phiêu lưu và thay đổi. Có khả năng thích ứng tốt và luôn tìm kiếm những trải nghiệm mới. Cuộc đời bạn hướng tới việc khám phá và mở rộng tầm nhìn.",
+                6: "Bạn có trách nhiệm cao với gia đình và cộng đồng. Tính cách chăm sóc, nuôi dưỡng giúp bạn tạo ra môi trường ấm áp. Cuộc đời bạn hướng tới việc phục vụ và bảo vệ những người bạn yêu thương.",
+                7: "Bạn là người tìm tòi, nghiên cứu với trực giác nhạy bén. Thích suy ngẫm và tìm hiểu sâu về bản chất sự vật. Cuộc đời bạn hướng tới việc tìm kiếm chân lý và phát triển tâm linh.",
+                8: "Bạn có năng lực kinh doanh và tham vọng mạnh mẽ. Khả năng tổ chức, quản lý giúp bạn đạt được thành công vật chất. Cuộc đời bạn hướng tới việc xây dựng quyền lực và ảnh hưởng.",
+                9: "Bạn có tấm lòng nhân đạo rộng lớn và tinh thần cống hiến cao. Hiểu biết sâu sắc về cuộc sống giúp bạn giúp đỡ nhiều người. Cuộc đời bạn hướng tới việc phục vụ nhân loại.",
+                11: "Bạn là người có trực giác siêu phàm và khả năng truyền cảm hứng mạnh mẽ. Là master number, bạn có sứ mệnh đặc biệt trong việc nâng cao ý thức tập thể và dẫn dắt tinh thần.",
+                22: "Bạn là kiến trúc sư chính (Master Builder) với khả năng biến ước mơ thành hiện thực. Có sức mạnh để tạo ra những công trình vĩ đại phục vụ nhân loại.",
+                33: "Bạn là giáo viên chính (Master Teacher) với khả năng chữa lành và nâng đỡ tinh thần. Có sứ mệnh đặc biệt trong việc lan tỏa tình yêu thương và trí tuệ."
+            },
+            expression: {
+                1: "Bạn thể hiện bản thân qua khả năng lãnh đạo và sự độc lập. Tài năng của bạn nằm ở việc khởi xướng và dẫn dắt những ý tưởng mới.",
+                2: "Bạn thể hiện bản thân qua sự hợp tác và hòa hợp. Tài năng của bạn nằm ở việc kết nối mọi người và tạo ra sự cân bằng.",
+                3: "Bạn thể hiện bản thân qua nghệ thuật và giao tiếp. Tài năng của bạn nằm ở việc sáng tạo và truyền cảm hứng cho người khác.",
+                4: "Bạn thể hiện bản thân qua sự thực tế và kỷ luật. Tài năng của bạn nằm ở việc xây dựng và tổ chức các hệ thống bền vững.",
+                5: "Bạn thể hiện bản thân qua sự tự do và thay đổi. Tài năng của bạn nằm ở việc thích ứng và khám phá những khả năng mới.",
+                6: "Bạn thể hiện bản thân qua việc chăm sóc và phục vụ. Tài năng của bạn nằm ở việc nuôi dưỡng và bảo vệ những người xung quanh.",
+                7: "Bạn thể hiện bản thân qua việc nghiên cứu và tìm hiểu. Tài năng của bạn nằm ở việc phân tích sâu sắc và khám phá chân lý.",
+                8: "Bạn thể hiện bản thân qua khả năng kinh doanh và quản lý. Tài năng của bạn nằm ở việc tổ chức và đạt được thành công vật chất.",
+                9: "Bạn thể hiện bản thân qua tinh thần nhân đạo và cống hiến. Tài năng của bạn nằm ở việc phục vụ và nâng đỡ cộng đồng."
+            },
+            soulUrge: {
+                1: "Khát vọng sâu thẳm của bạn là được công nhận và khẳng định bản thân. Bạn muốn trở thành người dẫn đầu và tạo ra dấu ấn riêng.",
+                2: "Khát vọng sâu thẳm của bạn là tạo ra sự hòa hợp và kết nối. Bạn muốn được yêu thương, hiểu biết và sống trong môi trường hài hòa.",
+                3: "Khát vọng sâu thẳm của bạn là được thể hiện sự sáng tạo. Bạn muốn mang lại niềm vui, cảm hứng và vẻ đẹp cho thế giới.",
+                4: "Khát vọng sâu thẳm của bạn là tạo ra sự ổn định và an toàn. Bạn muốn xây dựng nền tảng vững chắc cho bản thân và những người thân yêu.",
+                5: "Khát vọng sâu thẳm của bạn là được tự do và khám phá. Bạn muốn trải nghiệm đa dạng cuộc sống và không bị ràng buộc.",
+                6: "Khát vọng sâu thẳm của bạn là được chăm sóc và bảo vệ những người yêu thương. Bạn muốn tạo ra gia đình hạnh phúc và môi trường ấm áp.",
+                7: "Khát vọng sâu thẳm của bạn là tìm kiếm chân lý và hiểu biết. Bạn muốn khám phá những bí ẩn sâu kín của cuộc sống và vũ trụ.",
+                8: "Khát vọng sâu thẳm của bạn là đạt được thành công và quyền lực. Bạn muốn có ảnh hưởng, địa vị và khả năng thay đổi thế giới.",
+                9: "Khát vọng sâu thẳm của bạn là phục vụ nhân loại. Bạn muốn cống hiến, giúp đỡ người khác và tạo ra sự khác biệt tích cực."
+            }
+        };
+
+        function getInterpretation(type, number) {
+            return interpretations[type][number] || "Số đặc biệt với ý nghĩa sâu sắc cần được nghiên cứu thêm.";
+        }
+
+        function calculateNumerology(event) {
+            event.preventDefault();
+            
+            const day = parseInt(document.getElementById('day').value);
+            const month = parseInt(document.getElementById('month').value);
+            const year = parseInt(document.getElementById('year').value);
+            
+            if (!day || !month || !year) {
+                alert('Vui lòng nhập đầy đủ ngày, tháng, năm sinh');
+                return;
+            }
+            
+            if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2024) {
+                alert('Vui lòng nhập ngày sinh hợp lệ');
+                return;
+            }
+            
+            // Calculate numbers
+            const lifePathNumber = calculateLifePath(day, month, year);
+            const expressionNumber = calculateExpression(day, month, year);
+            const soulUrgeNumber = calculateSoulUrge(day, month, year);
+            
+            // Display results
+            document.getElementById('birth-date').textContent = `${day}/${month}/${year}`;
+            document.getElementById('life-path-number').textContent = lifePathNumber;
+            document.getElementById('expression-number').textContent = expressionNumber;
+            document.getElementById('soul-urge-number').textContent = soulUrgeNumber;
+            
+            // Display interpretations
+            document.getElementById('life-path-description').textContent = getInterpretation('lifePath', lifePathNumber);
+            document.getElementById('expression-description').textContent = getInterpretation('expression', expressionNumber);
+            document.getElementById('soul-urge-description').textContent = getInterpretation('soulUrge', soulUrgeNumber);
+            
+            // Show results section
+            document.getElementById('results').classList.remove('hidden');
+            
+            // Smooth scroll to results
+            setTimeout(() => {
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        // Smooth scrolling for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
